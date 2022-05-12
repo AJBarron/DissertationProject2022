@@ -7,6 +7,7 @@ mainHTML = `<!DOCTYPE html>
 
     <link rel="stylesheet" type="text/css" 
     href="style.css">
+    <script src="main.js" defer></script>
 
     <style>
         table {
@@ -30,14 +31,7 @@ mainHTML = `<!DOCTYPE html>
             <h1>ATTENTION!</h1>
             
             <div class="sub_header">
-                <script>
-                    function show(shown, hidden) {
-                      document.getElementById(shown).style.display='block';
-                      document.getElementById(hidden).style.display='none';
-                      return false;
-                    }
-                    window.onload = show('main', 'sources');
-                </script>
+                
 
                 <div id="main">
                     <h2>Your data is unsafe!</h2>
@@ -53,8 +47,6 @@ mainHTML = `<!DOCTYPE html>
                     <div>• Facebook allowed the British consulting firm Cambridge Analytica to harvest the personal information of 87 million users (Hinds, Williams & Joinson, 2020).</div>
                     <div>• Facebook has repeatedly misused your data and abused your personal privacy. Do you still trust them?</div>
                     
-
-                    <a href="#" onclick="show('sources','main');">Show sources</a>
 
                     <div class = "final_text">
                         <h3>If you still wish to access the site...</h3>
@@ -83,7 +75,6 @@ mainHTML = `<!DOCTYPE html>
 
                     </div>
 
-                    <a href="#" onclick="show('main','sources');">Go back</a>
                 </div>
             </div>
 
@@ -96,10 +87,43 @@ mainHTML = `<!DOCTYPE html>
 
 loadPage(mainHTML)
 
+const showButton = document.createElement('button')
+showButton.innerText = 'Go back'
+
+showButton.id = 'mainButton'
+
+showButton.addEventListener('click', () => {
+    show('main', 'sources')
+})
+
+
+const sourcesButton = document.createElement('button')
+sourcesButton.innerText = 'Show sources'
+
+sourcesButton.id = 'mainButton'
+
+sourcesButton.addEventListener('click', () => {
+    show('sources', 'main')
+})
+
+document.getElementById("main").appendChild(sourcesButton)
+document.getElementById("sources").appendChild(showButton)
+
 function loadPage(htmlPage)
 {
     document.open()
     document.write(htmlPage)
-    document.close()
+
+    show('main', 'sources');
 }
+
+
+function show(shown, hidden) 
+{
+    document.getElementById(shown).style.display='block';
+    document.getElementById(hidden).style.display='none';
+    return false;
+}
+
+
 
